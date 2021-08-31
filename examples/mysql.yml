@@ -1,0 +1,10 @@
+version: '3.4'
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_DATABASE=lportal
+      - MYSQL_ROOT_PASSWORD=secret
+    #    volumes:
+    #      - dbmysql:/var/lib/mysql
+    command: --datadir=/var/lib/mysql/data --character-set-server=utf8 --collation-server=utf8_bin

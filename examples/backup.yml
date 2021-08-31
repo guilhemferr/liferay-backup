@@ -1,0 +1,21 @@
+version: '3.4'
+services:
+  backup:
+    image: mysql-backup
+    environment:
+      - DB_SERVER=mysql
+      - DB_USER=root
+      - DB_PASS=secret
+      - DB_DUMP_TARGET=/db
+      - DB_DUMP_FILE_PREFIX=portal_backup
+      - DB_SYNC_TARGET_DIR=/include
+      - DB_NAMES=lportal
+      - DB_DUMP_DEBUG=true
+      - DB_DUMP_SAFECHARS=true
+      - NICE=true
+      - DB_DUMP_FREQ=5
+      - DB_DUMP_BEGIN=+2
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/db
+      - ./test:/include

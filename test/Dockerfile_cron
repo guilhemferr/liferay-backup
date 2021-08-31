@@ -1,0 +1,8 @@
+ARG BASE=liferaybackup_backup_test
+FROM ${BASE}
+
+COPY entrypoint_cron.sh /entrypoint
+
+ENTRYPOINT ["/entrypoint"]
+
+

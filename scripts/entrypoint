@@ -1,0 +1,26 @@
+#!/bin/bash
+#set -Eeo pipefail
+
+source /usr/local/bin/dump_restore.sh
+
+function _main() {
+  case $@ in
+  backup)
+    set_env
+    dump_target
+    ;;
+  restore)
+    set_env
+    restore_target
+    ;;
+  *)
+    printf "[ERROR] %s\n" "Bad parameters: $*"
+    echo
+    echo 'Consider using: [ backup | restore ]'
+    echo
+    exit 1
+    ;;
+  esac
+}
+
+_main "$@"

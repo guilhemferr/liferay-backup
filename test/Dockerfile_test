@@ -1,0 +1,18 @@
+# mysql backup image
+ARG BASE=liferaybackup_backup_test
+FROM ${BASE}
+
+# set us up to run as non-root user
+# user/group 'liferay' are created in the base
+USER root
+
+RUN mkdir -p /portal_backup && chown liferay:liferay /portal_backup
+
+USER liferay
+
+COPY entrypoint_test.sh /usr/local/bin/entrypoint
+COPY cron_test.sh /usr/local/bin/cron_test.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint"]
+CMD ["help"]
+

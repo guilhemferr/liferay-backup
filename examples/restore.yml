@@ -1,0 +1,20 @@
+version: '3.4'
+services:
+  restore:
+    image: mysql-backup
+    environment:
+      - DB_SERVER=mysql
+      - DB_USER=root
+      - DB_PASS=secret
+      - DB_DUMP_DEBUG=true
+      - DB_RESTORE_TARGET=/db #/portal_bak.tgz
+      - DB_SYNC_TARGET_DIR=/include
+      - DB_RESTORE_BEGIN=+2
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/db
+      - ./test:/include
+  mysql:
+    extends:
+      file: mysql.yml
+      service: mysql
